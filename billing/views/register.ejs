@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">  
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="css/style.min.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-secondary">
+    <div class="container">
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                    <div class="col-lg-7 bg-success">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                            </div>
+                            <form action="/register/register" method="post" class="user">
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text" class="form-control form-control-user" id="exampleFirstName" name="FirstName" placeholder="First Name" required>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control form-control-user" id="exampleLastName" name="LastName" placeholder="Last Name" required>
+                                    </div>
+                                </div> 
+                                                        
+                                <div class="form-group">
+                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail" name="EmailAddress" placeholder="Email Address" required>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="password" class="form-control form-control-user" id="exampleInputPassword" name="Password" placeholder="Password" required>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" name="RepeatPassword" placeholder="Repeat Password" required>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-warning btn-user btn-block">
+                                    Register Account
+                                </button>
+                                <hr>
+                                <a href="https://accounts.google.com/o/oauth2/v2/auth?
+                                scope=email%20profile&
+                                redirect_uri=YOUR_REDIRECT_URI&
+                                response_type=code&
+                                client_id=YOUR_CLIENT_ID" class="btn btn-google btn-user btn-block">
+                                    <i class="fab fa-google fa-fw"></i> Register with Google
+                                </a>
+                                <a href="https://www.facebook.com/" class="btn btn-facebook btn-user btn-block">
+                                    <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
+                                </a>
+                            </form>
+                            
+                            <hr>
+                            <div class="text-center">
+                                <a class="small" href="/forgot-password">Forgot Password?</a>
+                            </div>
+                            <div class="text-center">
+                                <a class="small" href="/login">Already have an account? Login!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+   
+    <!-- <script>
+         function continueTo() {
+        const formData = {
+            FirstName: document.getElementById('exampleFirstName').value,
+            LastName: document.getElementById('exampleLastName').value,
+            EmailAddress: document.getElementById('exampleInputEmail').value,
+            password: document.getElementById('exampleInputPassword').value,
+            RepeatPassword: document.getElementById('exampleRepeatPassword').value,
+        };
+
+        fetch('/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+    }
+    </script> -->
+</body>
+
+</html>
