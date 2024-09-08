@@ -1,17 +1,12 @@
 const db = require('../db/connect.js');
 
 const stocksControllers = {
-   getStocksPage: (req, res) => {
-    // Query to fetch brands from the database
+  // Fetch brands, categories, and sizes
+  getStocksPage: (req, res) => {
     const brandQuery = `SELECT * FROM brands`;
-
-    // Query to fetch categories from the database
     const categoryQuery = `SELECT * FROM categories`;
-
-    // Query to fetch sizes from the database
     const sizeQuery = `SELECT * FROM sizes`;
 
-    // Execute all queries using Promise.all to ensure all data is fetched before rendering
     Promise.all([
       new Promise((resolve, reject) => {
         db.query(brandQuery, (err, brandResults) => {
@@ -33,7 +28,6 @@ const stocksControllers = {
       })
     ])
       .then(([brandResults, categoryResults, sizeResults]) => {
-        // Render the stocks page with the fetched data
         res.render('stocks', {
           title: 'Welcome to the Home Management System',
           category: categoryResults,
@@ -42,28 +36,32 @@ const stocksControllers = {
         });
       })
       .catch((err) => {
-        // Handle errors if any of the queries fail
         console.error('Error fetching data:', err);
         res.status(500).send('Server Error');
       });
   },
 
+  // Insert stock details into the add_stock table
   submitStock: (req, res) => {
-    const { ItemID, ItemName, Category, Brand, Size, Amount } = req.body;
+    const { ItemID, ItemName, Category, Brand, Size, Amount, quantity } = req.body;
 
     const today = new Date();
-    const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
-    const StockDate = today.toLocaleDateString('en-IN', options);
+
+    // Format StockDate as YYYY-MM-DD (MySQL preferred date format)
+    const StockDate = today.toISOString().split('T')[0]; // This will give you YYYY-MM-DD format
+
+    // Format StockTime as HH:MM:SS
     const StockTime = today.toTimeString().split(' ')[0];
 
-    // Insert query to add the data into the add_stock table
-    const query = `INSERT INTO add_stock (ItemID, ItemName, Category, Brand, Size, Amount, StockDate, StockTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+    const query = `
+      INSERT INTO add_stock (ItemID, ItemName, Category, Brand, Size, Amount, quantity, StockDate, StockTime) 
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `;
 
-    // Execute the query with the values from the form
-    db.query(query, [ItemID, ItemName, Category, Brand, Size, Amount, StockDate, StockTime], (err, result) => {
+    db.query(query, [ItemID, ItemName, Category, Brand, Size, Amount, quantity, StockDate, StockTime], (err, result) => {
       if (err) throw err;
       console.log('Data inserted into add_stock table:', result);
-      res.redirect('/stocks'); // Redirect to the main page after insertion
+      res.redirect('/stocks');
     });
   }
 };

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const ordersControllers = require('../controllers/ordersControllers');
+const { ordersControllers, deleteOrderItem } = require('../controllers/ordersControllers');
 
 // GET route for fetching and displaying orders
 router.get('/', (req, res) => {
@@ -15,8 +15,28 @@ router.get('/', (req, res) => {
       title: 'Welcome to the Orders Management System',
       orders,
       sub_orders,
-      selected_item: 'None' // Or modify based on filter logic
+      selected_item: 'None' 
     });
+  });
+});
+
+// POST route to delete an item
+router.post('/deleteitem', (req, res) => {
+  const ItemNo = req.body.deleteid;
+
+  if (!ItemNo) {
+    return res.status(400).send('Item ID is required for deletion');
+  }
+
+  // Call the deleteOrderItem function
+  deleteOrderItem(ItemNo, (err, result) => {
+    if (err) {
+      return res.status(500).send('Error deleting item');
+    }
+
+    console.log('Item deleted successfully with ID:', ItemNo);
+    // Redirect to the orders page after deletion
+    res.redirect('/');
   });
 });
 
@@ -26,7 +46,6 @@ router.post('/orders_query', (req, res) => {
   let month = req.body['selected_month'];
   let year = req.body['selected_year'];
 
-  // Validate the year
   if (!year) {
     return res.status(400).send('Year is required');
   }
@@ -35,17 +54,13 @@ router.post('/orders_query', (req, res) => {
     return res.status(400).send('Month is required for month-based filtering');
   }
 
-  // Call the controller with the appropriate parameters
   ordersControllers(time_type, month, year, (err, results) => {
     if (err) {
       console.error('Error in ordersControllers:', err);
       return res.status(500).send('Error fetching filtered data');
     }
-    console.log('time_type:', time_type, 'month:', month, 'year:', year);
 
     const { orders, sub_orders } = results;
-
-    // Render the filtered results
     const monthNames = ["January", "February", "March", "April", "May", "June",
                         "July", "August", "September", "October", "November", "December"];
     let month_name = time_type === 'month' ? monthNames[parseInt(month, 10) - 1] : 'None';

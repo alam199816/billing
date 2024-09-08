@@ -16,10 +16,10 @@
 <body>
   <!--Vertical Navbar-->
   <div class="vertical-nav bg-white" id="sidebar">
-    <div class="py-4 px-3 mb-4" style="background: linear-gradient(to top, #0066eb 0%, #ff8ab3 68%);">
+    <div class="py-4 px-3 mb-4" style="background: linear-gradient(to top, #90EE90 0%, #FFB385 68%);">
       <div class="media d-flex align-items-center"><img src="/css/admin.svg" alt="..." width="65" class="mr-3 rounded-circle img-thumbnail shadow-sm">
         &emsp;<div class="media-body">
-          <h4 class="m-0"><p class="text-white"><shop-name></h4>
+          <h4 class="m-0"><p class="text-white">Hubuk Garments</h4>
             <p class="font-weight-light text-white mb-0">(Admin)</p>
         </div>
       </div>
@@ -96,7 +96,7 @@
   
     <ul class="nav flex-column bg-white mb-0">
       <li class="nav-item">
-        <a href="/sales_filter" class="nav-link text-dark font-italic" style="background: linear-gradient(to right, #0066eb 0%, #ff8ab3 68%);">
+        <a href="/sales_filter" class="nav-link text-dark font-italic" style="background: linear-gradient(to right, #90EE90 0%, #FFB385 68%);">
           <i class="yelp icon"></i>
                   Sales
               </a>
@@ -113,7 +113,7 @@
   
   
   <!-- Page content holder -->
-  <div class="page-content p-5" id="content" style="background: linear-gradient(to right, #e9edf1 47%, #ff8ab3 100%); ">
+  <div class="page-content p-5" id="content" style="background: linear-gradient(to right, #90EE90 47%, #FFB385 100%); ">
     <!-- Toggle button -->
     <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i class="align justify icon"></i><small class="text-uppercase font-weight-bold">Menu</small></button>
   
@@ -266,7 +266,7 @@
             </div>
             </div>
             </div>
-        <table class="ui inverted violet table table-bordered" >
+            <table class="ui inverted table table-bordered" style="background-color: #2E8B57; color: white;">
           <thead>
           <tr class="table-success">
               <th>Date <i class="calendar alternate outline icon"></i></th>
@@ -276,7 +276,7 @@
       </thead>
       <tbody>
           <% display_content.forEach(function(order){ %>
-              <tr style="background: linear-gradient(to left, #0066eb 0%, #ff8ab3 68%);">
+              <tr style="background: linear-gradient(to left, #90EE90 0%, #FFB385 68%);">
                  
                   <td><%= order.date %></td>
                   <td><%= order.ItemName %></td>
@@ -332,7 +332,7 @@
                 </div>
                 </div>
                 </div>
-          <table class="ui inverted violet table table-bordered" >
+                <table class="ui inverted table table-bordered" style="background-color: #2E8B57; color: white;">
             <thead>
             <tr class="table-success">
                 <th>Brand <i class="yelp icon"></i></th>
@@ -342,7 +342,7 @@
         </thead>
         <tbody>
             <% display_content.forEach(function(order){ %>
-                <tr style="background: linear-gradient(to left, #0066eb 0%, #ff8ab3 68%);">
+                <tr style="background: linear-gradient(to left, #90EE90 0%, #FFB385 68%);">
                     <td><%= order.Brand %></td>
                     <td><%= order.ItemName %></td>
                     <td><i class="rupee sign icon"></i> <%= order.Amount %> </td> 
@@ -393,7 +393,7 @@
                 </div>
                 </div>
                 </div>
-          <table class="ui inverted violet table table-bordered" >
+                <table class="ui inverted table table-bordered" style="background-color: #2E8B57; color: white;">
             <thead>
             <tr class="table-success">
                 <th>Category <i class="list icon"></i></th>
@@ -403,7 +403,7 @@
         </thead>
         <tbody>
             <% display_content.forEach(function(order){ %>
-                <tr style="background: linear-gradient(to left, #0066eb 0%, #ff8ab3 68%);">
+                <tr style="background: linear-gradient(to left, #90EE90 0%, #FFB385 68%);">
                     <td><%= order.Category %></td>
                     <td><%= order.ItemName %></td>
                     <td><i class="rupee sign icon"></i> <%= order.Amount %> </td> 
@@ -460,7 +460,7 @@
               </div>
               </div>
               </div>
-          <table class="ui inverted violet table table-bordered" >
+              <table class="ui inverted table table-bordered" style="background-color: #2E8B57; color: white;">
             <thead>
             <tr class="table-success">
                 <th>Month <i class="calendar alternate outline icon"></i></th>
@@ -470,7 +470,7 @@
         </thead>
         <tbody>
             <% display_content.forEach(function(order){ %>
-                <tr style="background: linear-gradient(to left, #0066eb 0%, #ff8ab3 68%);">
+                <tr style="background: linear-gradient(to left, #90EE90 0%, #FFB385 68%);">
                    
                     <td><%= monthNames[parseInt(order.TMonth)-1] %></td>
                     <td><%= order.ItemName %></td>
@@ -522,7 +522,7 @@
                   </div>
                   </div>
                   </div>
-            <table class="ui inverted violet table table-bordered" >
+                  <table class="ui inverted table table-bordered" style="background-color: #2E8B57; color: white;">
               <thead>
               <tr class="table-success">
                   <th>Brand <i class="yelp icon"></i></th>
@@ -532,7 +532,7 @@
           </thead>
           <tbody>
               <% display_content.forEach(function(order){ %>
-                  <tr style="background: linear-gradient(to left, #0066eb 0%, #ff8ab3 68%);">
+                  <tr style="background: linear-gradient(to left, #90EE90 0%, #FFB385 68%);">
                       <td><%= order.Brand %></td>
                       <td><%= order.ItemName %></td>
                       <td><i class="rupee sign icon"></i> <%= order.Amount %> </td> 
@@ -583,7 +583,7 @@
                   </div>
                   </div>
                   </div>
-            <table class="ui inverted violet table table-bordered" >
+                  <table class="ui inverted table table-bordered" style="background-color: #2E8B57; color: white;">
               <thead>
               <tr class="table-success">
                   <th>Category <i class="list icon"></i></th>
@@ -593,7 +593,7 @@
           </thead>
           <tbody>
               <% display_content.forEach(function(order){ %>
-                  <tr style="background: linear-gradient(to left, #0066eb 0%, #ff8ab3 68%);">
+                  <tr style="background: linear-gradient(to left, #90EE90 0%, #FFB385 68%);">
                       <td><%= order.Category %></td>
                       <td><%= order.ItemName %></td>
                       <td><i class="rupee sign icon"></i> <%= order.Amount %> </td> 

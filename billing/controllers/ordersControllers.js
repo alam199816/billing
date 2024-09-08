@@ -1,12 +1,25 @@
-
 const db = require('../db/connect.js');
 
+// Function to delete an item by ItemID
+const deleteOrderItem = (ItemNo, callback) => {
+  const deleteQuery = `DELETE FROM bills WHERE ItemNo = ?`;
+
+  db.query(deleteQuery, [ItemNo], (err, result) => {
+    if (err) {
+      console.error('Error deleting item: ', err);
+      return callback(err, null);
+    }
+
+    console.log('Item deleted successfully:', ItemNo);
+    callback(null, result);
+  });
+};
+
+// Function to fetch orders and sub-orders
 const ordersControllers = (time_type, month, year, callback) => {
   console.log('orders Controller is set up and ready to use.');
 
-  // Ensure year is an integer
   year = parseInt(year, 10);
-
   if (isNaN(year)) {
     return callback(new Error('Invalid year'), null);
   }
@@ -15,17 +28,14 @@ const ordersControllers = (time_type, month, year, callback) => {
   let params = [];
 
   if (time_type === 'month') {
-    // Ensure month is an integer
     month = parseInt(month, 10);
-
     if (isNaN(month)) {
       return callback(new Error('Invalid month'), null);
     }
 
-    // Query for month-based filter
     query = `
       SELECT 
-       ItemNo, 
+        ItemNo, 
         SUM(Amount) AS Amount, 
         date, 
         time 
@@ -35,7 +45,6 @@ const ordersControllers = (time_type, month, year, callback) => {
     `;
     params = [month, year];
   } else if (time_type === 'year') {
-    // Query for year-based filter
     query = `
       SELECT 
         ItemNo, 
@@ -55,9 +64,6 @@ const ordersControllers = (time_type, month, year, callback) => {
       return callback(error, null);
     }
 
-    console.log('Data fetched successfully');
-
-    // Fetch sub_orders
     const subOrdersQuery = 'SELECT * FROM bills';
     db.query(subOrdersQuery, [], (err1, subOrdersResults) => {
       if (err1) {
@@ -65,10 +71,12 @@ const ordersControllers = (time_type, month, year, callback) => {
         return callback(err1, null);
       }
 
-      // Return both orders and sub_orders
       callback(null, { orders: results, sub_orders: subOrdersResults });
     });
   });
 };
 
-module.exports = ordersControllers;
+module.exports = {
+  ordersControllers,
+  deleteOrderItem
+};

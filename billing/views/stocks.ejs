@@ -16,10 +16,10 @@
   <body>
      <!--Vertical Navbar-->
   <div class="vertical-nav bg-white" id="sidebar">
-    <div class="py-4 px-3 mb-4" style="background: linear-gradient(to top, #0066eb 0%, #ff8ab3 68%);">
+    <div class="py-4 px-3 mb-4" style="background: linear-gradient(to top, #00FF7F 0%, #ff8ab3 68%);">
       <div class="media d-flex align-items-center"><img src="/css/admin.svg" alt="..." width="65" class="mr-3 rounded-circle img-thumbnail shadow-sm">
         &emsp;<div class="media-body">
-          <h4 class="m-0"><p class="text-white"><shop-name></h4>
+          <h4 class="m-0"><p class="text-white">Hubuk Garments</h4>
           <p class="font-weight-light text-white mb-0">(Admin)</p>
         </div>
       </div>
@@ -58,7 +58,7 @@
               </a>
       </li>
       <li class="nav-item">
-        <a href="/stocks" class="nav-link text-dark font-italic" style="background: linear-gradient(to right, #0066eb 0%, #ff8ab3 68%);">
+        <a href="/stocks" class="nav-link text-dark font-italic" style="background: linear-gradient(to right, #00FF7F 0%, #ff8ab3 68%);">
           <p class="text-white"><i class="plus circle icon"></i>
                   Add Stock
                   </p>
@@ -119,7 +119,7 @@
   <!-- End vertical navbar -->
   
      <!-- Page content holder -->
-  <div class="page-content p-5" id="content" style="background: linear-gradient(to right, #e9edf1 47%, #ff8ab3 100%);">
+  <div class="page-content p-5" id="content" style="background: linear-gradient(to right, #90EE90 47%, #FFB385 68%);">
     <!-- Toggle button -->
     <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i class="align justify icon"></i><small class="text-uppercase font-weight-bold">Menu</small></button>
   
@@ -136,7 +136,7 @@
     <form action="/stocks/submitstock" method="POST">
     <table class="ui inverted pink celled table tbl_code_with_mark" id="myTable">
       <thead>
-        <tr style="background: linear-gradient(to left, #0066eb 0%, #ff8ab3 68%);">
+        <tr style="background: linear-gradient(to left, #00FF7F 0%, #ff8ab3 68%);">
           <th>Item No.</th>
           <th>Item ID</th>
           <th>Item Name</th>
@@ -144,6 +144,7 @@
           <th>Brand</th>
           <th>Size</th>
           <th>Amount</th>
+          <th>Qty</th>
           <th>Stock Date</th>
           <th>Stock Time</th>
         </tr>
@@ -173,17 +174,7 @@
                 <% category.forEach(function(order){ %>
                   <option name="<%= order.Category %>" value="<%= order.Category %>"><%= order.Category %></option>
                 <% }); %>
-                <!-- <option name="shirt" value="Shirt">Shirt</option>
-                <option name="jeans" value="Jeans">Jeans</option>
-                <option name="cottonpant" value="Cotton Pant">Cotton Pant</option>
-                <option name="tshirt" value="T-Shirt">T-Shirt</option>
-                <option name="trouser" value="Trouser">Trouser</option>
-                <option name="halfpant" value="Half Pant">Half Pant</option>
-                <option name="capri" value="Capri">Capri</option>
-                <option name="vest" value="Vest">Vest</option>
-                <option name="underwear" value="Underwear">Underwear</option>
-                <option name="kurta" value="Kurta">Kurta</option>
-                <option name="pajama" value="Pajama">Pajama</option> -->
+               
               </select>
                 <label for="floatingInput">Category</label>
             </div>
@@ -195,15 +186,7 @@
                 <% brand.forEach(function(order){ %>
                   <option value="<%= order.Brand %>"><%= order.Brand %></option>
                   <% }); %>
-                <!-- <option value="Turtle">Turtle</option>
-                <option value="Duke">Duke</option>
-                <option value="US Polo">US Polo</option>
-                <option value="Flying Machine">Flying Machine</option>
-                <option value="Donear">Donear</option>
-                <option value="Adven">Adven</option>
-                <option value="Siffar">Siffar</option>
-                <option value="Law Man">Law Man</option>
-                <option value="John Player">John Player</option> -->
+               
               </select>
                 <label for="floatingInput">Brand</label>
             </div>
@@ -215,11 +198,7 @@
                 <% size.forEach(function(order){ %>
                   <option value="<%= order.Size %>"><%= order.Size %></option>
                 <% }); %>
-                <!-- <option value="S">S</option>
-                <option value="M">M</option>
-                <option value="L">L</option>
-                <option value="XL">XL</option>
-                <option value="XXL">XXL</option> -->
+               
               </select>
               <label for="floatingInput">Size</label>
             </div>
@@ -231,6 +210,12 @@
               
           </div>
           </td>
+          <td class="table-success">
+            <div class="form-floating">
+                <input type="number" class="form-control" name="quantity" id="quantity" min="1" placeholder="Enter Quantity" required>
+                <label for="quantity">Qty</label>
+            </div>
+        </td>
           <td class="table-success">
             <div class="form-floating">
                 <input type="date" class="form-control" name="StockDate" id="stockDate" required>
@@ -362,13 +347,19 @@
   document.getElementById('stockDate').value = new Date().toDateString()
   document.getElementById('stockTime').value = new Date().toTimeString().split(' ')[0].slice(0, 5);
 
-  // const currentDate = new Date().toDateString(); // e.g., "Tue Aug 13 2024"
-  //   document.getElementById('stockDate').value = currentDate;
-    
-  //   // Automatically set the current time in the format "HH:MM"
-  //   const currentTime = new Date().toTimeString().split(' ')[0].slice(0, 5);
-  //   document.getElementById('stockTime').value = currentTime;
-  
+  //generate time and date automatic
+  window.onload = function() {
+        // Get the current date and time
+        const now = new Date();
+
+        // Set the current date in YYYY-MM-DD format
+        const date = now.toISOString().split('T')[0];
+        document.getElementById('stockDate').value = date;
+
+        // Set the current time in HH:MM format
+        const time = now.toTimeString().split(' ')[0].slice(0, 5);
+        document.getElementById('stockTime').value = time;
+    };
     </script>
   </body>
 </html>

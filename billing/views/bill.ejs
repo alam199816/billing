@@ -134,6 +134,7 @@
           <th>Brand</th>
           <th>Size</th>
           <th>Amount</th>
+          <th>Qty</th>
           <th>Date</th>
           <th>Time</th>
           <th>Phone Number</th>
@@ -198,6 +199,13 @@
               
           </div>
           </td>
+
+          <td class="table-success">
+            <div class="form-floating">
+                <input type="number" class="form-control" name="quantity" id="quantity" min="1" placeholder="Enter Quantity" required>
+                <label for="quantity">Qty</label>
+            </div>
+        </td>
 
           <td class="table-success"> 
             <div class="form-floating">
@@ -523,15 +531,28 @@
   };
 }
 
-const dateObj = new Date(dateString);
+// const dateObj = new Date(dateString);
   
-  // Format the date and time
-  const formattedDate = dateObj.toISOString().split('T')[0]; // YYYY-MM-DD format
-  const formattedTime = dateObj.toTimeString().split(' ')[0].substring(0, 5); // HH:MM format
+//   // Format the date and time
+//   const formattedDate = dateObj.toISOString().split('T')[0]; // YYYY-MM-DD format
+//   const formattedTime = dateObj.toTimeString().split(' ')[0].substring(0, 5); // HH:MM format
 
-  // Set the value of the input fields
-  document.getElementById('date').value = formattedDate;
-  document.getElementById('time').value = formattedTime;
+//   // Set the value of the input fields
+//   document.getElementById('date').value = formattedDate;
+//   document.getElementById('time').value = formattedTime;
+
+  window.onload = function() {
+        // Get the current date and time
+        const now = new Date();
+
+        // Set the current date in YYYY-MM-DD format
+        const date = now.toISOString().split('T')[0];
+        document.getElementById('date').value = date;
+
+        // Set the current time in HH:MM format
+        const time = now.toTimeString().split(' ')[0].slice(0, 5);
+        document.getElementById('time').value = time;
+    };
   </script>
   </body>
 </html>

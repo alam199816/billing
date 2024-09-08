@@ -13,15 +13,19 @@
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
   <title>Billing Techno</title>
-  
+  <style>
+    .bg-pink {
+  background-color: pink !important;
+}
+  </style>
 </head>
 <body>
   <!--Vertical Navbar-->
   <div class="vertical-nav bg-white" id="sidebar">
-    <div class="py-4 px-3 mb-4" style="background: linear-gradient(to top, #0066eb 0%, #ff8ab3 68%);">
+    <div class="py-4 px-3 mb-4" style="background: linear-gradient(to top, #90EE90 40%,  #FFB385 68%);">
       <div class="media d-flex align-items-center"><img src="/css/admin.svg" alt="..." width="65" class="mr-3 rounded-circle img-thumbnail shadow-sm">
         &emsp;<div class="media-body">
-          <h4 class="m-0"><p class="text-white"><shop-name></h4>
+          <h4 class="m-0"><p class="text-white">Hubuk Garments</h4>
             <p class="font-weight-light text-white mb-0">(Admin)</p>
         </div>
       </div>
@@ -40,7 +44,7 @@
   
     <ul class="nav flex-column bg-white mb-0">
       <li class="nav-item">
-        <a href="/" class="nav-link text-dark font-italic" style="background: linear-gradient(to right, #0066eb 0%, #ff8ab3 68%);">
+        <a href="/" class="nav-link text-dark font-italic" style="background: linear-gradient(to right, #90EE90 0%, #FFB385 68%);">
                   <p class="text-white"><i class="home icon"></i>
                   Dashboard
                 </p>
@@ -120,7 +124,7 @@
   
   
   <!-- Page content holder -->
-  <div class="page-content p-5" id="content" style="background: linear-gradient(to right, #e9edf1 47%, #ff8ab3 100%);">
+  <div class="page-content p-5" id="content" style="background: linear-gradient(to right, #90EE90 47%, #FFB385 100%);">
     <!-- Toggle button -->
     <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i class="align justify icon"></i><small class="text-uppercase font-weight-bold">Menu</small></button>
   
@@ -145,7 +149,7 @@
     <div class="fluid container">
     <div class="ui four column grid">
       <div class="col-sm-6">
-        <div class="ui fluid card text-white bg-success">
+        <div class="ui fluid card text-white" style="background-color: #66CDAA;">
          
           <div class="content">
             <center>
@@ -165,7 +169,7 @@
         </div>
       </div>
       <div class="col-sm-6">
-        <div class="ui fluid card text-white bg-primary">
+        <div class="ui fluid card text-white" style="background-color: #BC8F8F;">
           
           <div class="fluid content">
             <center>
@@ -184,7 +188,7 @@
         </div>
       </div>
       <div class="col-sm-6">
-        <div class="ui fluid card text-dark bg-warning">
+        <div class="ui fluid card text-dark" style="background-color: #D2691E;">
           <div class="content">
             <center>
             <div class="ui statistic">
@@ -203,7 +207,7 @@
       </div>
 
       <div class="col-sm-6">
-        <div class="ui fluid card text-white " style="background-color: #6a1b9a;">
+        <div class="ui fluid card text-white " style="background-color: #B8860B;">
           <div class="fluid content">
             <center>
             <div class="ui statistic">
@@ -222,7 +226,7 @@
       </div>
 
       <div class="col-sm-6">
-        <div class="ui fluid card text-white bg-info">
+        <div class="ui fluid card text-white" style="background-color: #00FA9A;">
           <div class="fluid content">
             <center>
             <div class="ui statistic">
@@ -236,17 +240,18 @@
               </div>
             </div>
 
-              <% stockBySize.forEach(stock => { %>
-                <li><%= stock.Size %> : <%= stock.sizeCount %></li>
+            <ul>
+              <% stockBySize.forEach(size => { %>
+                <li><%= size.Size %>: <%= size.totalQuantity %>  items : <%= size.ItemName %></li>
               <% }) %>
-  
+            </ul>
           </center>
           </div>
         </div>
       </div>
 
       <div class="col-sm-6">
-        <div class="ui fluid card text-white bg-danger">
+        <div class="ui fluid card text-white" style="background-color: #6B8E23;">
           <div class="fluid content">
             <center>
             <div class="ui statistic">
@@ -260,10 +265,36 @@
               </div>
             </div>
           
-              <% stockByCategory.forEach(stock => { %>
-                <li><%= stock.Category %> : <%= stock.categoryCount %></li>
+            <ul>
+              <% stockByCategory.forEach(category => { %>
+                <li><%= category.Category %>: <%= category.totalQuantity %> items</li>
               <% }) %>
-         
+            </ul>
+          </center>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="ui fluid card text-white bg-pink">
+          <div class="fluid content">
+            <center>
+            <div class="ui statistic">
+              <div class="value">
+                <p class="text-white">
+                  <i class="fas fa-tags"></i>
+                </p>
+              </div>
+              <div class="label">
+                Total Stock BY Brand
+              </div>
+            </div>
+          
+            <ul>
+              <% stockByBrand.forEach(brand => { %>
+                <li><%= brand.Brand %>: <%= brand.totalQuantity %> items : <%= brand.ItemName %></li>
+              <% }) %>
+            </ul>
           </center>
           </div>
         </div>

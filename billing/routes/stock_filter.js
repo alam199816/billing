@@ -20,7 +20,7 @@ router.post('/stock_filter_query', (req, res) => {
         title: 'Stock Filter Management',
         filter_type: 'brand',
         display_content: results,
-        total_items: [{ Count: results.length }] // Assuming Count is the number of items
+        total_items: [{ quantity: results.reduce((sum, item) => sum + item.quantity, 0) }] // Sum of all quantities
       });
     });
   } else if (filterType === 'category') {
@@ -32,7 +32,7 @@ router.post('/stock_filter_query', (req, res) => {
         title: 'Stock Filter Management',
         filter_type: 'category',
         display_content: results,
-        total_items: [{ Count: results.length }] // Assuming Count is the number of items
+        total_items: [{ quantity: results.reduce((sum, item) => sum + item.quantity, 0) }] // Sum of all quantities
       });
     });
   } else {

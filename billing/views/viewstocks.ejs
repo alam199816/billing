@@ -16,7 +16,7 @@
   <body>
      <!--Vertical Navbar-->
   <div class="vertical-nav bg-white" id="sidebar">
-    <div class="py-4 px-3 mb-4" style="background: linear-gradient(to top, #0066eb 0%, #ff8ab3 68%);">
+    <div class="py-4 px-3 mb-4" style="background: linear-gradient(to top, #90EE90 0%, #FFB385 68%);">
       <div class="media d-flex align-items-center"><img src="/css/admin.svg" alt="..." width="65" class="mr-3 rounded-circle img-thumbnail shadow-sm">
         &emsp;<div class="media-body">
           <h4 class="m-0"><p class="text-white"><shop-name></h4>
@@ -51,7 +51,7 @@
               </a>
       </li>
       <li class="nav-item">
-        <a href="/viewstocks" class="nav-link text-dark font-italic" style="background: linear-gradient(to right, #0066eb 0%, #ff8ab3 68%);">
+        <a href="/viewstocks" class="nav-link text-dark font-italic" style="background: linear-gradient(to right, #90EE90 0%, #FFB385 68%);">
           <p class="text-white"><i class="tags icon"></i>
                   View Stocks
                   </p>
@@ -112,7 +112,7 @@
   <!-- End vertical navbar -->
   
   <!-- Page content holder -->
-  <div class="page-content p-5" id="content" style="background: linear-gradient(to right, #e9edf1 47%, #ff8ab3 100%);">
+  <div class="page-content p-5" id="content" style="background: linear-gradient(to right, #90EE90 47%, #FFB385 68%);">
     <!-- Toggle button -->
     <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i class="align justify icon"></i><small class="text-uppercase font-weight-bold">Menu</small></button>
   
@@ -171,7 +171,7 @@
         </center>
       </form>
     <% if(filter_type == 'None') { %>  
-    <table class="ui inverted violet table table-bordered">
+      <table class="ui inverted table table-bordered" style="background-color: #A52A2A; color: white;">
         <thead>
         <tr>
             <th>Item ID</th>
@@ -180,19 +180,21 @@
             <th>Brand Name</th>
             <th>Size</th>
             <th>Amount</th>
+            <th>Quantity</th>
             <th>Date Entered</th>
             <th>Time Entered</th>
         </tr>
     </thead>
     <tbody>
         <% all_stocks.forEach(function(order){ %>
-            <tr style="background: linear-gradient(to left, #0066eb 0%, #ff8ab3 68%);">
+            <tr style="background: linear-gradient(to left, #66CDAA 0%, #CD5C5C 68%);">
                 <td><%= order.ItemID %>
                 <td><%= order.ItemName %></td>
                 <td><%= order.Category %></td>
                 <td><%= order.Brand %></td>
                 <td><%= order.Size %></td>
                 <td><%= order.Amount %></td>
+                <td><%= order.quantity %></td>
                 <td><%= order.StockDate %></td>
                 <td><%= order.StockTime %>&emsp;<form action="/viewstocks/deletestock" method="POST"><input type="hidden" name="deleteid" value="<%= order.ItemID %>"><button type="submit" class="btn btn-danger btn-sm">Delete</button></form></td>
                 <!-- <form action="/deleteitem" method="POST"><input type="hidden" name="deleteid" value="<%= order.TransactionID %>"><button type="submit" class="btn btn-danger btn-sm">Delete</button></form> -->
@@ -215,6 +217,7 @@
               <th>Brand Name</th>
               <th>Size</th>
               <th>Amount</th>
+              <th>Quantity</th>
               <th>Date Entered</th>
               <th>Time Entered</th>
           </tr>
@@ -228,6 +231,7 @@
                   <td><%= order.Brand %></td>
                   <td><%= order.Size %></td>
                   <td><%= order.Amount %></td>
+                  <td><%= order.quantity %></td>
                   <td><%= order.StockDate %></td>
                   <td><%= order.StockTime %>&emsp;<form action="/viewstocks/deletestock" method="POST"><input type="hidden" name="deleteid" value="<%= order.ItemID %>"><button type="submit" class="btn btn-danger btn-sm">Delete</button></form></td>
                   <!-- <form action="/deleteitem" method="POST"><input type="hidden" name="deleteid" value="<%= order.TransactionID %>"><button type="submit" class="btn btn-danger btn-sm">Delete</button></form> -->
@@ -250,6 +254,7 @@
                 <th>Brand Name</th>
                 <th>Size</th>
                 <th>Amount</th>
+                <th>Quantity</th>
                 <th>Date Entered</th>
                 <th>Time Entered</th>
             </tr>
@@ -263,6 +268,7 @@
                     <td><%= order.Brand %></td>
                     <td><%= order.Size %></td>
                     <td><%= order.Amount %></td>
+                    <td><%= order.quantity %></td>
                     <td><%= order.StockDate %></td>
                     <td><%= order.StockTime %>&emsp;<form action="/viewstocks/deletestock" method="POST"><input type="hidden" name="deleteid" value="<%= order.ItemID %>"><button type="submit" class="btn btn-danger btn-sm">Delete</button></form></td>
                     
@@ -288,9 +294,6 @@
     });
   });
   
-    </script>
-
-<script>
 
   function myFunction(){
     if (document.getElementById('exampleRadios2').checked == true){
